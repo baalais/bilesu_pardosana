@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirkumu Vēsture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #purchaseHistoryList {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .purchase-history {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pirkumu Vēsture</h2>
+    <div>
+        <label for="userID">Lietotāja ID:</label>
+        <input type="text" id="userID">
+        <button onclick="getPurchaseHistory()">Iegūt Pirkumu Vēsturi</button>
+    </div>
+
+    <div id="purchaseHistoryList"></div>
+
+    <script src="../vesture.js"></script>
+</body>
+</html>

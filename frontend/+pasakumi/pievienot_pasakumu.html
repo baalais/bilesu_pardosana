@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pievienot Pasākumu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pievienot Pasākumu</h2>
+    <form id="addEventForm">
+        <label for="eventName">Pasākuma nosaukums:</label>
+        <input type="text" id="eventName" name="eventName" required>
+        <br>
+        <label for="eventDate">Pasākuma datums:</label>
+        <input type="date" id="eventDate" name="eventDate" required>
+        <br>
+        <label for="eventTime">Pasākuma laiks:</label>
+        <input type="time" id="eventTime" name="eventTime" required>
+        <br>
+        <label for="ticketType">Biļetes veids:</label>
+        <input type="text" id="ticketType" name="ticketType" required>
+        <br>
+        <label for="venue">Pasākuma vieta:</label>
+        <input type="text" id="venue" name="venue" required>
+        <br>
+        <label for="ticketPrice">Biļetes cena:</label>
+        <input type="number" step="0.01" id="ticketPrice" name="ticketPrice" required>
+        <br>
+        <button type="button" onclick="addEvent()">Pievienot Pasākumu</button>
+        <div id="addEventError" class="error"></div>
+    </form>
+
+    <script src="../pievienot_pasakumu.js"></script>
+</body>
+</html>

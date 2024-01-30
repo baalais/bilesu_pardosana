@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atsauksmes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #reviewsList {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .review {
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h2>Atsauksmes par pasākumu</h2>
+    <div>
+        <label for="eventID">Pasākuma ID:</label>
+        <input type="text" id="eventID">
+        <button onclick="getReviews()">Iegūt Atsauksmes</button>
+    </div>
+
+    <div id="reviewsList"></div>
+
+    <script src="../vesture.js"></script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pierakstīšanās un Reģistrācija</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        form {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .error {
+            color: red;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Pierakstīšanās</h2>
+    <form id="loginForm">
+        <label for="loginUsername">Lietotājvārds:</label>
+        <input type="text" id="loginUsername" name="loginUsername" required>
+        <br>
+        <label for="loginPassword">Parole:</label>
+        <input type="password" id="loginPassword" name="loginPassword" required>
+        <br>
+        <button type="button" onclick="login()">Pierakstīties</button>
+        <div id="loginError" class="error"></div>
+    </form>
+
+    <h2>Reģistrācija</h2>
+    <form id="registerForm">
+        <label for="registerUsername">Lietotājvārds:</label>
+        <input type="text" id="registerUsername" name="registerUsername" required>
+        <br>
+        <label for="registerPassword">Parole:</label>
+        <input type="password" id="registerPassword" name="registerPassword" required>
+        <br>
+        <label for="confirmPassword">Apstipriniet paroli:</label>
+        <input type="password" id="confirmPassword" name="confirmPassword" required>
+        <br>
+        <button type="button" onclick="register()">Reģistrēties</button>
+        <div id="registerError" class="error"></div>
+    </form>
+
+    <script src="../login.js"></script>
+</body>
+</html>

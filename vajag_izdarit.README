@@ -1,0 +1,64 @@
+          
+          
+          
+          Servera Puse (PHP):
+          
+Reģistrācija un Pierakstīšanās:
+Izveidojiet datu bāzi, kurā saglabāsiet lietotāju informāciju (ID, lietotājvārds, e-pasta adrese, parole utt.).
+Izveidojiet PHP skriptus reģistrēšanai un pierakstīšanai. 
++
+
+Pasākumu Izveide:
+Izveidojiet datu bāzi pasākumu informācijai (pasākuma ID, nosaukums, datums, laiks, vieta, biļešu veids, cena utt.).
+Izveidojiet PHP skriptus, lai pievienotu jaunus pasākumus datu bāzei.
++
+
+Biļešu Pārvaldība:
+Izveidojiet datu bāzi biļešu informācijai (pasākuma ID, lietotāja ID, biļetes skaits, cena utt.).
+Izveidojiet PHP skriptus, lai pārvaldītu biļešu pirkšanu un saglabātu informāciju datu bāzē.
++
+
+Pasākumu Saraksts un Meklēšana:
+Izveidojiet PHP skriptus, lai iegūtu pasākumu sarakstu no datu bāzes un filtrētu pēc žanra, datuma utt.
++
+
+Biļešu Atsauksmes un Pirkumu Vēsture:
+Izveidojiet datu bāzi atsauksmēm un biļešu pirkumu vēsturei.
+Izveidojiet PHP skriptus, lai pārvaldītu atsauksmes un pirkumu vēsturi.
++
+
+
+
+
+        Klienta Puse (HTML, CSS, JavaScript):
+
+Lietotāja Reģistrācija un Pierakstīšanās:
+Izveidojiet HTML formu reģistrācijai un pierakstīšanai.
+Izmantojiet JavaScript, lai veiktu klienta pusi validācijai un nosūtītu datus servera pusei.
++
+
+Pasākumu Izveide:
+Izveidojiet HTML formu jaunu pasākumu pievienošanai.
+Izmantojiet JavaScript, lai nosūtītu datus servera pusei un saņemtu atbildi.
++
+
+Biļešu Pārvaldība:
+Izveidojiet HTML sadaļu, kur lietotāji var pārvaldīt biļetes (pārskatīt, iegādāties).
+Izmantojiet JavaScript, lai komunicētu ar serveri un pārvaldītu biļetes.
+
+
+Pasākumu Saraksts un Meklēšana:
+Izveidojiet HTML sadaļu ar pasākumu sarakstu un filtrēšanas iespējām.
+Izmantojiet JavaScript, lai iegūtu datus no servera un attēlotu tos lietotājiem.
++
+
+Biļešu Atsauksmes un Pirkumu Vēsture:
+Izveidojiet HTML sadaļu, kur lietotāji var atstāt atsauksmes un skatīt pirkumu vēsturi.
+Izmantojiet JavaScript, lai pārvaldītu atsauksmes un pirkumu vēsturi.
++
+
+Biļešu Saglabāšana PDF Formātā:
+Izmantojiet JavaScript, lai ģenerētu PDF ar biļetes informāciju un piedāvātu lietotājam lejupielādēt.
+
+Dizains un Stils:
+Izveidojiet lietotājam draudzīgu un pievilcīgu interfeisu, izmantojot HTML un CSS.
