@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-  require_once("../db/db_connection.php");
+  require_once(__DIR__ . "/../db/db_connection.php");
 
   // Iegūstam filtrēšanas parametrus no GET pieprasījuma
   $eventID = isset($_GET["eventID"]) ? $_GET["eventID"] : null;

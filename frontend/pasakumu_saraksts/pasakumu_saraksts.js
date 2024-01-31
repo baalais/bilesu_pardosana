@@ -7,7 +7,7 @@ function getEvents() {
   // un iegūtu pasākumu sarakstu ar filtrēšanu
 
   // Piemērs ar fetch:
-  fetch(`../backend/pasakumu_saraksts/iegut_pasakumu_sarakstu.php?genre=${genre}&startDate=${startDate}&endDate=${endDate}`)
+  fetch(`http://localhost/bilesu_pardosana/bilesu_pardosana/backend/pasakumu_saraksts/iegut_pasakumu_sarakstu.php?genre=${genre}&startDate=${startDate}&endDate=${endDate}`)
       .then(response => response.json())
       .then(data => {
           displayEvents(data);

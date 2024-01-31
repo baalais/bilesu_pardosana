@@ -1,22 +1,33 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once("../db/db_connection.php");
+    // Read the raw JSON data from the request body
+    $json = file_get_contents('php://input');
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
+    // Decode the JSON data into an associative array
+    $data = json_decode($json, true);
 
-    $stmt = $conn->prepare("SELECT UserID, PasswordHash FROM Users WHERE Username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $stmt->bind_result($userID, $storedPassword);
+    // Check if the necessary keys are set in the decoded data
+    if ($data && isset($data["loginUsername"]) && isset($data["loginPassword"])) {
+        require_once(__DIR__ . "/../db/db_connection.php");
 
-    if ($stmt->fetch() && password_verify($password, $storedPassword)) {
-        echo "Pierakstīšanās veiksmīga! UserID: $userID";
+        $username = $data["loginUsername"];
+        $password = $data["loginPassword"];
+
+        $stmt = $conn->prepare("SELECT UserID, PasswordHash FROM Users WHERE Username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->bind_result($userID, $storedPassword);
+
+        if ($stmt->fetch() && password_verify($password, $storedPassword)) {
+            echo "Pierakstīšanās veiksmīga! UserID: $userID";
+        } else {
+            echo "Nepareizs lietotājvārds vai parole.";
+        }
+
+        $stmt->close();
+        $conn->close();
     } else {
-        echo "Nepareizs lietotājvārds vai parole.";
+        echo "Invalid or missing JSON data.";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

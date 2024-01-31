@@ -62,3 +62,8 @@ Izmantojiet JavaScript, lai ģenerētu PDF ar biļetes informāciju un piedāvā
 
 Dizains un Stils:
 Izveidojiet lietotājam draudzīgu un pievilcīgu interfeisu, izmantojot HTML un CSS.
+
+
+Pasakumu pievienosanai izveidot validaciju ja tads pasakums jau pastav kad nevar pievienot velvienu lai nevaretu spamot pogu
+
+Kad clonoju kodu no github man vinu jaievito xxamp/htdocs un jaizveido jauna mape (bilesu_pardosana)

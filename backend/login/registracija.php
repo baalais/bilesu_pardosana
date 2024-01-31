@@ -1,20 +1,37 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    require_once("../db/db_connection.php");
+    // Read the raw JSON data from the request body
+    $json = file_get_contents('php://input');
 
-    $username = $_POST["username"];
-    $password = password_hash($_POST["password"], PASSWORD_BCRYPT);
+    // Decode the JSON data into an associative array
+    $data = json_decode($json, true);
 
-    $stmt = $conn->prepare("INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)");
-    $stmt->bind_param("ss", $username, $password);
+    // Check if the necessary keys are set in the decoded data
+    if ($data && isset($data["username"]) && isset($data["password"])) {
+        require_once(__DIR__ . "/../db/db_connection.php");
 
-    if ($stmt->execute()) {
-        echo "Reģistrācija veiksmīga!";
+        $username = $data["username"];
+        $password = password_hash($data["password"], PASSWORD_BCRYPT);
+
+        $stmt = $conn->prepare("INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)");
+
+        if ($stmt) {
+            $stmt->bind_param("ss", $username, $password);
+
+            if ($stmt->execute()) {
+                echo "Reģistrācija veiksmīga!";
+            } else {
+                echo "Reģistrācijas kļūda: " . $stmt->error;
+            }
+
+            $stmt->close();
+        } else {
+            echo "Statement preparation failed.";
+        }
+
+        $conn->close();
     } else {
-        echo "Reģistrācijas kļūda: " . $stmt->error;
+        echo "Username and password are required.";
     }
-
-    $stmt->close();
-    $conn->close();
 }
 ?>

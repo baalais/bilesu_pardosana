@@ -5,7 +5,7 @@ function getReviews() {
   // un iegūtu atsauksmes par norādīto pasākumu
 
   // Piemērs ar fetch:
-  fetch(`../backend/vesture/atsauksmes.php?eventID=${eventID}`)
+  fetch(`http://localhost/bilesu_pardosana/bilesu_pardosana/backend/vesture/atsauksmes.php?eventID=${eventID}`)
       .then(response => response.json())
       .then(data => {
           displayReviews(data);
@@ -38,7 +38,7 @@ function getPurchaseHistory() {
   // un iegūtu pirkumu vēsturi par norādīto lietotāju
 
   // Piemērs ar fetch:
-  fetch(`../backend/vesture/pirkumu_vesture.php?userID=${userID}`)
+  fetch(`http://localhost/bilesu_pardosana/bilesu_pardosana/backend/vesture/pirkumu_vesture.php?userID=${userID}`)
       .then(response => response.json())
       .then(data => {
           displayPurchaseHistory(data);
