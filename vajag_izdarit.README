@@ -44,7 +44,7 @@ Izmantojiet JavaScript, lai nosūtītu datus servera pusei un saņemtu atbildi.
 Biļešu Pārvaldība:
 Izveidojiet HTML sadaļu, kur lietotāji var pārvaldīt biļetes (pārskatīt, iegādāties).
 Izmantojiet JavaScript, lai komunicētu ar serveri un pārvaldītu biļetes.
-
++
 
 Pasākumu Saraksts un Meklēšana:
 Izveidojiet HTML sadaļu ar pasākumu sarakstu un filtrēšanas iespējām.

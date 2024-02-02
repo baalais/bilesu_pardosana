@@ -1,10 +1,13 @@
 <?php
+//pievienot_pasakumu.php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     require_once(__DIR__ . "/../db/db_connection.php");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
+
     function validateInput($input)
     {
         $input = trim($input);
@@ -24,10 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $eventDate = validateInput($_POST["eventDate"] ?? '');
     $eventTime = validateInput($_POST["eventTime"] ?? '');
     $ticketType = validateInput($_POST["ticketType"] ?? '');
-    $venue = validateInput($_POST["venue"] ?? '');
+    $venue = validateInput($_POST["Venue"] ?? ''); // Change $Venue to $venue
     $ticketPrice = validateInput($_POST["ticketPrice"] ?? '');
     $ticketQuantity = validateInput($_POST["ticketQuantity"] ?? '');
-
 
     if (empty($eventName) || empty($eventDate) || empty($eventTime) || empty($ticketType) || empty($venue) || empty($ticketPrice) || empty($ticketQuantity)) {
         echo "Visi lauki ir obligāti aizpildāmi!";
@@ -39,7 +41,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit;
     }
 
-    // Pārbaude, vai pasākums jau pastāv
     $stmt_check = $conn->prepare("SELECT EventID FROM Events WHERE EventName = ?");
     $stmt_check->bind_param("s", $eventName);
     $stmt_check->execute();
@@ -52,30 +53,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $stmt_check->close();
 
-    // Prepare the statement with the existing 'Quantity' field
     $stmt = $conn->prepare("INSERT INTO Events (EventName, EventDate, EventTime, TicketType, Venue, TicketPrice, Quantity) VALUES (?, ?, ?, ?, ?, ?, ?)");
 
-    // Check for errors in the prepare statement
     if (!$stmt) {
-        die("Prepare failed: " . $conn->error);
+        echo "Prepare failed: " . $conn->error;
+        exit;
     }
 
     $stmt->bind_param("ssssdss", $eventName, $eventDate, $eventTime, $ticketType, $venue, $ticketPrice, $ticketQuantity);
 
-    // Check for errors in the bind_param
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    // Debugging the SQL query
+    $sql = "INSERT INTO Events (EventName, EventDate, EventTime, TicketType, Venue, TicketPrice, Quantity) VALUES ('$eventName', '$eventDate', '$eventTime', '$ticketType', '$venue', $ticketPrice, $ticketQuantity)";
+    echo "SQL Query: " . $sql . "<br>";
 
-    // ... (your existing code)
-
-    if ($stmt->execute()) {
-        echo "Pasākums veiksmīgi pievienots!";
-    } else {
+    if (!$stmt->execute()) {
         echo "Pasākuma pievienošanas kļūda: " . $stmt->error;
+        exit;
     }
 
-    // Close the statement, but do not close the connection here
+    echo "Pasākums veiksmīgi pievienots!";
+
     $stmt->close();
-    // Do not close the connection here
+    $conn->close();
 }
 ?>

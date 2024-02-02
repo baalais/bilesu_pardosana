@@ -3,14 +3,21 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column; /* Ensure children stack vertically */
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background-color: #f0f0f0;
+}
+
+#header-container {
+    width: 100%; /* Make the header container take full width */
 }
 
 .container {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allow the container to grow to fill available space */
 }
 
 #eventFormContainer {
@@ -18,8 +25,8 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    margin: 20px;
     width: 400px;
+    margin:20px;
 }
 
 #addEventForm {

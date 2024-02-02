@@ -1,4 +1,6 @@
 <?php
+//iegut_pasakumu_sarakstu.php
+session_start();
 // Include the database connection
 require_once(__DIR__ . "/../db/db_connection.php");
 

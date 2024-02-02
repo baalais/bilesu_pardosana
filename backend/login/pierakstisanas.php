@@ -1,4 +1,6 @@
 <?php
+//pierakstisanas.php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Read the raw JSON data from the request body
     $json = file_get_contents('php://input');
@@ -27,6 +29,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 "userID" => $userID,
                 "role" => $role
             ]);
+
+            // Inside the successful login block
+            echo json_encode([
+                "success" => true,
+                "message" => "Pierakstīšanās veiksmīga!",
+                "userID" => $userID,
+                "role" => $role,
+                "authToken" => $authToken
+            ]);
+
+            // After successful login
+            $_SESSION["userID"] = $userID;
+            $_SESSION["token"] = $authToken;
+
+            echo "UserID: " . $_SESSION["userID"] . "<br>";
+            echo "Token: " . $_SESSION["token"] . "<br>";
+
+
         } else {
             // Login unsuccessful, display an error message
             echo json_encode(["success" => false, "message" => "Nepareizs lietotājvārds vai parole."]);

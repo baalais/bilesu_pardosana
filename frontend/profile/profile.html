@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" type="text/css" href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <div class="profile-info" id="profileInfo">
+            <!-- User profile information will be inserted here dynamically -->
+        </div>
+        <div class="ticket-history">
+            <h2>Bought Ticket History:</h2>
+            <ul id="ticketHistory">
+                <!-- Ticket history will be inserted here dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+      fetch('http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.html')
+          .then(response => response.text())
+          .then(headerData => {
+              document.getElementById('header-container').innerHTML = headerData;
+          })
+          .catch(error => console.error('Error fetching header:', error));
+  </script>
+
+</body>
+</html>

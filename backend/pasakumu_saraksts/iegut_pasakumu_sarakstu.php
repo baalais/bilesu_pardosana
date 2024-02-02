@@ -1,4 +1,6 @@
 <?php
+//iegut_pasakumu_sarakstu.php
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
   require_once(__DIR__ . "/../db/db_connection.php");
 

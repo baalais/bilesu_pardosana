@@ -1,4 +1,7 @@
-<?php // register code
+<?php
+// registracija.php
+session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Read the raw JSON data from the request body
     $json = file_get_contents('php://input');
@@ -20,9 +23,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 $userID = $stmt->insert_id; // Retrieve the user ID after successful registration
-                $authToken = generateAuthToken(); // You need to implement this function
-                updateAuthToken($conn, $userID, $authToken); // You need to implement this function
+                $authToken = generateAuthToken(); // Generate authentication token
+                updateAuthToken($conn, $userID, $authToken); // Update user's auth token in the database
 
+                // Return the generated token along with other data in the JSON response
                 echo json_encode([
                     "success" => true,
                     "message" => "Reģistrācija veiksmīga!",
