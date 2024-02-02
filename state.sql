@@ -2,8 +2,11 @@
 CREATE TABLE Users (
     UserID INT PRIMARY KEY AUTO_INCREMENT,
     Username VARCHAR(50) NOT NULL,
-    PasswordHash VARCHAR(255) NOT NULL
+    PasswordHash VARCHAR(255) NOT NULL,
+    Role ENUM('user', 'admin') NOT NULL DEFAULT 'user',
+    AuthToken VARCHAR(255)
 );
+
 
 -- Pasākumi
 CREATE TABLE Events (
@@ -12,8 +15,9 @@ CREATE TABLE Events (
     EventDate DATE NOT NULL,
     EventTime TIME NOT NULL,
     TicketType VARCHAR(50) NOT NULL,
-    Venue VARCHAR(100) NOT NULL,
-    TicketPrice DECIMAL(10, 2) NOT NULL
+    Venue TEXT NOT NULL,
+    TicketPrice DECIMAL(10, 2) NOT NULL,
+    Quantity DECIMAL(10, 2) NOT NULL DEFAULT 0
 );
 
 -- Biļetes
@@ -26,6 +30,7 @@ CREATE TABLE Tickets (
     CONSTRAINT fk_Event FOREIGN KEY (EventID) REFERENCES Events(EventID),
     CONSTRAINT fk_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
+
 
 -- Atsauksmes
 CREATE TABLE Reviews (

@@ -10,38 +10,36 @@
     <div class="container">
         <div id="eventFormContainer">
             <h2>Pievienot Pasākumu</h2>
-            <div id="addEventForm">
-                <div class="form-group">
+            <!-- Wrap your input fields in a form element and give it an ID -->
+            <form id="eventForm">
+                <div id="addEventForm" class="form-group">
                     <label for="eventName">Pasākuma nosaukums:</label>
                     <input type="text" id="eventName" name="eventName" required>
-                </div>
-                <div class="form-group">
+                
                     <label for="eventDate">Pasākuma datums:</label>
                     <input type="date" id="eventDate" name="eventDate" required>
-                </div>
-                <div class="form-group">
+                
                     <label for="eventTime">Pasākuma laiks:</label>
                     <input type="time" id="eventTime" name="eventTime" required>
-                </div>
-                <div class="form-group">
-                    <label for="ticketType">Biļetes veids:</label>
+                
+                    <label for="ticketType">Žanrs:</label>
                     <input type="text" id="ticketType" name="ticketType" required>
-                </div>
-                <div class="form-group">
+                
                     <label for="venue">Pasākuma vieta:</label>
-                    <input type="text" id="venue" name="venue" required>
-                </div>
-                <div class="form-group">
+                    <input type="text" id="venue" name="venue" />
+                
                     <label for="ticketPrice">Biļetes cena:</label>
                     <input type="number" step="0.01" id="ticketPrice" name="ticketPrice" required>
+
+                    <label for="ticketQuantity">Biļešu skaits:</label>
+                    <input type="number" id="ticketQuantity" name="ticketQuantity" required>
                 </div>
                 <button type="button" id="addEventButton" onclick="addEvent()">Pievienot Pasākumu</button>
-                <div id="addEventError" class="error"></div>
-            </div>
+            </form>
+            <div id="addEventError" class="error"></div>
         </div>
     </div>
 
     <script src="pievienot_pasakumu.js"></script>
 </body>
 </html>
-

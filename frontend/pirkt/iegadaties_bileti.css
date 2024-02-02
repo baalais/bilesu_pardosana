@@ -1,0 +1,56 @@
+/* Buy Ticket Page CSS Styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.event-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  margin: 20px auto;
+  max-width: 400px; /* Adjust as needed */
+}
+
+h2 {
+  text-align: center;
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#eventName {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+#ticketPrice {
+  font-size: 14px;
+  color: #555;
+}
+
+.buy-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.buy-button:hover {
+  background-color: #45a049;
+}

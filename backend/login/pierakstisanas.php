@@ -13,21 +13,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $data["loginUsername"];
         $password = $data["loginPassword"];
 
-        $stmt = $conn->prepare("SELECT UserID, PasswordHash FROM Users WHERE Username = ?");
+        // Use prepared statements to prevent SQL injection
+        $stmt = $conn->prepare("SELECT UserID, PasswordHash, Role FROM Users WHERE Username = ?");
         $stmt->bind_param("s", $username);
         $stmt->execute();
-        $stmt->bind_result($userID, $storedPassword);
+        $stmt->bind_result($userID, $storedPassword, $role);
 
         if ($stmt->fetch() && password_verify($password, $storedPassword)) {
-            echo "Pierakstīšanās veiksmīga! UserID: $userID";
+            // Login successful, you can handle other login-related tasks here
+            echo json_encode([
+                "success" => true,
+                "message" => "Pierakstīšanās veiksmīga!",
+                "userID" => $userID,
+                "role" => $role
+            ]);
         } else {
-            echo "Nepareizs lietotājvārds vai parole.";
+            // Login unsuccessful, display an error message
+            echo json_encode(["success" => false, "message" => "Nepareizs lietotājvārds vai parole."]);
         }
 
         $stmt->close();
         $conn->close();
     } else {
-        echo "Invalid or missing JSON data.";
+        // Invalid or missing JSON data
+        echo json_encode(["success" => false, "message" => "Invalid or missing JSON data."]);
     }
 }
 ?>

@@ -2,18 +2,18 @@
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
   require_once(__DIR__ . "/../db/db_connection.php");
 
-  // Iegūstam filtrēšanas parametrus no GET pieprasījuma
-  $genre = isset($_GET["genre"]) ? $_GET["genre"] : null;
+  // Get filtering parameters from GET request
+  $ticketType = isset($_GET["ticketType"]) ? $_GET["ticketType"] : null;
   $startDate = isset($_GET["startDate"]) ? $_GET["startDate"] : null;
   $endDate = isset($_GET["endDate"]) ? $_GET["endDate"] : null;
 
-  // Veicam validāciju, piemēram, vai datumiem ir pareizs formāts
+  // Perform validation, e.g., check if dates have the correct format
 
-  // Izveidojam SQL vaicājumu, lai iegūtu pasākumu sarakstu ar filtrēšanu
+  // Create SQL query to retrieve the event list with filtering
   $sql = "SELECT * FROM Events WHERE 1";
 
-  if ($genre) {
-    $sql .= " AND Genre = '$genre'";
+  if ($ticketType) {
+    $sql .= " AND TicketType = '$ticketType'";
   }
 
   if ($startDate) {
@@ -26,16 +26,22 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
 
   $result = $conn->query($sql);
 
-  // Pārveidojam rezultātu masīvā
+  // Check if the query was successful
+  if (!$result) {
+    die(json_encode(["error" => "Query error: " . $conn->error]));
+  }
+
+  // Transform the result into an array
   $events = [];
   while ($row = $result->fetch_assoc()) {
     $events[] = $row;
   }
 
-  // Atgriežam rezultātu klienta pusei JSON formātā
+  // Return the result to the client in JSON format
   echo json_encode($events);
 
-  // Aizveram savienojumu ar datu bāzi
+  // Close the database connection
   $conn->close();
 }
+
 ?>
