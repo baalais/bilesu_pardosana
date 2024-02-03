@@ -6,8 +6,11 @@
     <title>Nopirkt biļeti</title>
     <!-- Add your stylesheets, scripts, and any other necessary resources -->
     <link rel="stylesheet" type="text/css" href="iegadaties_bileti.css">
+    <link rel="stylesheet" type="text/css"
+        href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
 </head>
 <body>
+    <div id="header-container"></div>
     <div class="event-details">
         <h2>Pasākuma detaļas</h2>
         <!-- Display event details dynamically using JavaScript -->
@@ -29,7 +32,60 @@
         <button id="buyButton" class="buy-button">Nopirkt biļeti</button>
     </div>
 
+    <div class="comment-section">
+        <h2>Atsauksmes</h2>
+        <form id="commentForm">
+            <label for="rating">Vērtējums (1-5):</label>
+            <input type="number" id="rating" name="rating" min="1" max="5" required>
+
+            <label for="comment">Komentārs:</label>
+            <textarea id="comment" name="comment" rows="4" required></textarea>
+
+            <button type="submit">Pievienot atsauksmi</button>
+        </form>
+        <ul id="commentList"></ul>
+    </div>
+
     <!-- Include your JavaScript file -->
     <script src="iegadaties_bileti.js"></script>
+    <script>
+        fetch('http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.body.insertAdjacentHTML('afterbegin', data);
+            })
+            .catch(error => console.error('Error fetching header:', error));
+
+        fetchComments();
+
+        // Function to fetch and display comments
+        function fetchComments() {
+            // Fetch comments based on the eventID
+            // Use a similar approach as fetching event details
+            // Display comments in the commentList ul element
+            const commentList = document.getElementById('commentList');
+            // Example data (replace with actual data from your server)
+            const commentsData = [
+                { username: 'User1', rating: 4, comment: 'Great event!' },
+                { username: 'User2', rating: 5, comment: 'Amazing experience!' },
+                { username: 'User3', rating: 3, comment: 'Good, but could be better.' },
+            ];
+
+            commentsData.forEach(comment => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${comment.username}</strong>
+                                    <p>Vērtējums: ${comment.rating}/5</p>
+                                    <p>${comment.comment}</p>`;
+                commentList.appendChild(listItem);
+            });
+        }
+
+        // Event listener for the comment form submission
+        document.getElementById('commentForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            // Implement logic to handle the comment form submission
+            // You may need to send the comment to the server and update the comment list
+        });
+    </script>
 </body>
 </html>

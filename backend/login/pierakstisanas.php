@@ -1,5 +1,5 @@
 <?php
-//pierakstisanas.php
+// pierakstisanas.php
 session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Read the raw JSON data from the request body
@@ -22,30 +22,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($userID, $storedPassword, $role);
 
         if ($stmt->fetch() && password_verify($password, $storedPassword)) {
-            // Login successful, you can handle other login-related tasks here
-            echo json_encode([
-                "success" => true,
-                "message" => "Pierakstīšanās veiksmīga!",
-                "userID" => $userID,
-                "role" => $role
-            ]);
+            // Generate an authentication token (you can use your own method)
+            $authToken = md5(uniqid());
 
-            // Inside the successful login block
+            // Store the token in the session
+            $_SESSION["userID"] = $userID;
+            $_SESSION["token"] = $authToken;
+
             echo json_encode([
                 "success" => true,
                 "message" => "Pierakstīšanās veiksmīga!",
                 "userID" => $userID,
                 "role" => $role,
-                "authToken" => $authToken
+                "AuthToken" => $authToken
             ]);
-
-            // After successful login
-            $_SESSION["userID"] = $userID;
-            $_SESSION["token"] = $authToken;
-
-            echo "UserID: " . $_SESSION["userID"] . "<br>";
-            echo "Token: " . $_SESSION["token"] . "<br>";
-
 
         } else {
             // Login unsuccessful, display an error message

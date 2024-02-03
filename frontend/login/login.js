@@ -40,19 +40,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 },
                 body: JSON.stringify({ loginUsername: username, loginPassword: password }),
             });
-        
+    
             const textResponse = await response.text();
             console.log("Full response from server:", textResponse);
-        
+    
             // Extract JSON content
             const jsonContent = textResponse.match(/\{.*\}/)[0];
             const data = JSON.parse(jsonContent);
-        
+    
             console.log("Parsed JSON data:", data);
-        
+    
             if (data.success) {
+                console.log(data.AuthToken);
+                // Store the token in local storage
+                localStorage.setItem('token', data.AuthToken);
+                localStorage.setItem('UserId', data.userID);
                 // Login successful, redirect to the new page
-                window.location.href = 'http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/pasakumu_saraksts/pasakumu_saraksts.html';
+                window.location.href = 'http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/pasakumu_saraksts/pasakumu_saraksts.php';
             } else {
                 // Login unsuccessful, display the error message
                 loginError.innerHTML = data.message;
@@ -120,7 +124,7 @@ document.addEventListener("DOMContentLoaded", function() {
             // Check if registration was successful
             if (data.includes("veiksmīga")) {
                 // Redirect to the new page upon successful registration
-                window.location.href = 'http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/pasakumu_saraksts/pasakumu_saraksts.html';
+                window.location.href = 'http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/pasakumu_saraksts/pasakumu_saraksts.php';
             }
         } catch (error) {
             console.error('Kļūda:', error);

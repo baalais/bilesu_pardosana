@@ -2,6 +2,19 @@
 // registracija.php
 session_start();
 
+function generateAuthToken()
+{
+    return bin2hex(random_bytes(32)); // Generate a 64-character hexadecimal token
+}
+
+function updateAuthToken($conn, $userID, $authToken)
+{
+    $stmt = $conn->prepare("UPDATE Users SET AuthToken = ? WHERE UserID = ?");
+    $stmt->bind_param("si", $authToken, $userID);
+    $stmt->execute();
+    $stmt->close();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Read the raw JSON data from the request body
     $json = file_get_contents('php://input');
@@ -46,18 +59,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo json_encode(["success" => false, "message" => "Username and password are required."]);
     }
-}
-
-function generateAuthToken()
-{
-    return bin2hex(random_bytes(32)); // Generate a 64-character hexadecimal token
-}
-
-function updateAuthToken($conn, $userID, $authToken)
-{
-    $stmt = $conn->prepare("UPDATE Users SET AuthToken = ? WHERE UserID = ?");
-    $stmt->bind_param("si", $authToken, $userID);
-    $stmt->execute();
-    $stmt->close();
 }
 ?>

@@ -1,14 +1,21 @@
+<?php
+import:
+'../sesijas.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pasākumu Saraksts</title>
     <link rel="stylesheet" type="text/css" href="pasakumu_saraksts.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
+    <link rel="stylesheet" type="text/css"
+        href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
 </head>
+
 <body>
-    
+
     <div id="header-container"></div>
     <div class="container">
         <h2>Pasākumu Saraksts</h2>
@@ -17,10 +24,10 @@
             <label for="ticketType" class="label">Žanrs:</label>
             <input type="text" id="ticketType" class="input-field">
 
-            
+
             <label for="startDate" class="label">Sākuma datums:</label>
             <input type="date" id="startDate" class="input-field">
-            
+
             <label for="endDate" class="label">Beigu datums:</label>
             <input type="date" id="endDate" class="input-field">
 
@@ -56,4 +63,5 @@
 
     <script src="pasakumu_saraksts.js"></script>
 </body>
+
 </html>

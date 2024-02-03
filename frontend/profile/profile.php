@@ -1,12 +1,20 @@
+<?php
+include '../sesijas.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <link rel="stylesheet" href="profile.css">
-    <link rel="stylesheet" type="text/css" href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
+    <link rel="stylesheet" type="text/css"
+        href="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.css">
+    <script src="http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/profile/profile.js">
+    </script>
 </head>
+
 <body>
     <div id="header-container"></div>
     <div class="profile-container">
@@ -22,14 +30,6 @@
         </div>
     </div>
 
-    <script>
-      fetch('http://localhost/bilesu_pardosana/bilesu_pardosana/frontend/header/header.html')
-          .then(response => response.text())
-          .then(headerData => {
-              document.getElementById('header-container').innerHTML = headerData;
-          })
-          .catch(error => console.error('Error fetching header:', error));
-  </script>
-
 </body>
+
 </html>
