@@ -1,5 +1,5 @@
 <?php
-//profile.php
+// profile.php
 session_start();
 if (!isset($_SESSION["userID"]) || !isset($_SESSION["token"])) {
   header("Location: http://localhost/bilesu_pardosana/bilesu_pardosana/backend/login/pierakstisanas.php");
@@ -11,7 +11,7 @@ require_once(__DIR__ . "/../db/db_connection.php");
 $userID = $_SESSION["userID"];
 $token = $_SESSION["token"];
 
-// Prepare the SQL statement
+// Prepare the SQL statement to fetch user data and ticket history
 $stmt = $conn->prepare("SELECT Username FROM users WHERE UserID = ?");
 if (!$stmt) {
   // Handle error
@@ -40,6 +40,29 @@ $stmt->close();
 $userData = [];
 if ($username !== null) {
   $userData['Username'] = $username;
+
+  // Fetch bought ticket history
+  $stmtTickets = $conn->prepare("SELECT EventName, EventDate FROM Tickets
+                                INNER JOIN Events ON Tickets.EventID = Events.EventID
+                                WHERE UserID = ?");
+  
+  if ($stmtTickets) {
+    $stmtTickets->bind_param("i", $userID);
+
+    if ($stmtTickets->execute()) {
+      $resultTickets = $stmtTickets->get_result();
+
+      // Fetch ticket history
+      $ticketHistory = [];
+      while ($row = $resultTickets->fetch_assoc()) {
+        $ticketHistory[] = $row;
+      }
+
+      $userData['ticketHistory'] = $ticketHistory;
+    }
+    
+    $stmtTickets->close();
+  }
 }
 
 // Return JSON response

@@ -29,13 +29,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $data["username"];
         $password = password_hash($data["password"], PASSWORD_BCRYPT);
 
-        $stmt = $conn->prepare("INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)");
+        // Check if the username already exists
+        $checkUsernameStmt = $conn->prepare("SELECT UserID FROM Users WHERE Username = ?");
+        $checkUsernameStmt->bind_param("s", $username);
+        $checkUsernameStmt->execute();
+        $checkUsernameStmt->store_result();
 
-        if ($stmt) {
-            $stmt->bind_param("ss", $username, $password);
+        if ($checkUsernameStmt->num_rows > 0) {
+            echo json_encode(["success" => false, "message" => "Lietotājvārds jau eksistē. Lūdzu, izvēlieties citu lietotājvārdu."]);
+            exit();
+        }
 
-            if ($stmt->execute()) {
-                $userID = $stmt->insert_id; // Retrieve the user ID after successful registration
+        $checkUsernameStmt->close();
+
+        // If the username is unique, proceed with registration
+        $insertStmt = $conn->prepare("INSERT INTO Users (Username, PasswordHash) VALUES (?, ?)");
+
+        if ($insertStmt) {
+            $insertStmt->bind_param("ss", $username, $password);
+
+            if ($insertStmt->execute()) {
+                $userID = $insertStmt->insert_id; // Retrieve the user ID after successful registration
                 $authToken = generateAuthToken(); // Generate authentication token
                 updateAuthToken($conn, $userID, $authToken); // Update user's auth token in the database
 
@@ -47,10 +61,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     "authToken" => $authToken
                 ]);
             } else {
-                echo json_encode(["success" => false, "message" => "Reģistrācijas kļūda: " . $stmt->error]);
+                echo json_encode(["success" => false, "message" => "Reģistrācijas kļūda: " . $insertStmt->error]);
             }
 
-            $stmt->close();
+            $insertStmt->close();
         } else {
             echo json_encode(["success" => false, "message" => "Statement preparation failed."]);
         }

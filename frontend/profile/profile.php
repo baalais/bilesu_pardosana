@@ -22,9 +22,9 @@ include '../sesijas.php';
         <div class="profile-info" id="profileInfo">
             <!-- User profile information will be inserted here dynamically -->
         </div>
-        <div class="ticket-history">
+        <div class="boughtHistory">
             <h2>Bought Ticket History:</h2>
-            <ul id="ticketHistory">
+            <ul id="boughtHistory">
                 <!-- Ticket history will be inserted here dynamically -->
             </ul>
         </div>
